@@ -8,9 +8,10 @@ class Credits{
         textFont(pxlfnt);
         fill(241, 250, 238).strokeWeight(0).textSize(20);
         text(`Made by`, width/2, 50);
-        text(`Everyting else was done by me - Tapu`, width/2, 260);
+        text(`Everyting else was done by me - Tapu`, width/2, 280);
         text(`Font`, width/2, 205);
         text(`Music`, width/2, 150);
+        text(`Jam logo provided by GMTK`, width/2, 260);
         text(`@TasfiqulTapu`, width/2, 120);
         text(`Click anywhere to go back`, width/2, height-20);
         text(`Made for`, width/2, height-120);

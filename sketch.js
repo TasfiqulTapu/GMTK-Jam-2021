@@ -1,9 +1,16 @@
-let menu,game,spn,player,core,lvl,tstage,hint,cre,logo;
-let h1,h2,h3,h4,h5,en,he,sh,ov,pxlfnt,hit,hem,moosic;
+let menu,game,spn,player,core,lvl,tstage,hint,cre,logo,sps;
+let h1,h2,h3,h4,h5,en,he,sh,ov,pxlfnt,hit,hem,moosic,mpng;
 let enemy = [];
 let score = 0;
 let currentScreen;
+let playing = false;
 function preload() {
+
+  logo = loadImage('art/gmtk.gif');
+  soundFormats('wav','mp3');
+  hit = loadSound('art/hit.wav');
+  hem = loadSound('art/health.wav');
+  moosic = loadSound('art/spoopy.mp3');
   h1 = loadImage('art/5.png');
   h2 = loadImage('art/4.png');
   h3 = loadImage('art/3.png');
@@ -13,12 +20,9 @@ function preload() {
   he = loadImage('art/heart.png');
   sh = loadImage('art/shield.png');
   ov = loadImage('art/overlay.png');
-  logo = loadImage('art/gmtk.gif');
+  mpng = loadImage('art/menu.png');
   pxlfnt = loadFont('art/pixelFont.ttf');
-  soundFormats('wav','mp3');
-  hit = loadSound('art/hit');
-  hem = loadSound('art/health');
-  moosic = loadSound('art/spoopy.mp3');
+
 }
 
 function setup() {
@@ -26,10 +30,12 @@ function setup() {
     menu = new Menu();
     spn = new Spawner();
     cre = new Credits();
+    sps = new Splash();
     currentScreen = 'menu';
     player = new Player(width/2,height/2);
     core = new Core();
     //spn.debug(-30,height/2,1,0,5);
+    
 }
 
 //this.x, this.y,this._x,this._y
@@ -44,6 +50,23 @@ function mousePressed() {
         currentScreen = 'credits';
        }
     }else if (currentScreen == 'game') {
+      if (mouseX>width/3 && mouseX<width/3 * 2 && mouseY>0 && mouseY<height/2) {
+        player.x = width/2;
+        player.y = height/2 - player.r;
+        player.rot = 'w';
+      } else if (mouseX>width/3 && mouseX<width/3 * 2 && mouseY>height/2 && mouseY<height){
+        player.x = width/2;
+        player.y = height/2 + player.r;
+        player.rot = 'w';
+      }else if (mouseX>0 && mouseX<width/2 && mouseY>height/3 && mouseY<height/3 * 2) {
+        player.x = width/2 - player.r;
+        player.y = height/2;
+        player.rot = 'l';
+      } else if (mouseX>width/2 && mouseX<width && mouseY>height/3 && mouseY<height/3 * 2){
+        player.x = width/2 + player.r;
+        player.y = height/2;
+        player.rot = 'l';
+      }
     }else if (currentScreen == 'credits') {
       currentScreen = 'menu';
     }else if (currentScreen == 'gameover') {
@@ -60,13 +83,21 @@ function draw() {
   //  if (enemy.length > 0) {
   //    console.log(enemy)
   //  }
-
+    if ( sps.i < sps.total) {
+      currentScreen = 'splash'
+       sps.i++ ;
+    }else if(currentScreen == 'splash'){
+      currentScreen = 'menu'
+    }
     if (currentScreen == 'menu') {
         menu.show();
        moosic.pause();
+       playing = false;
 
     }else if (currentScreen == 'credits') {
       cre.show();
+    }else if (currentScreen == 'splash') {
+      sps.show();
     }else if (currentScreen == 'game') {
       
       spn.spawn(lvl);
@@ -262,7 +293,10 @@ function reset() {
   score = 0;
   enemy = [];
   hint = 'Use WASD / Arrow Keys to move';
-  moosic.loop();
+  if (!playing) {
+    moosic.loop();
+    playing = true;
+  }
   enemy.push(new Enemy('a',0))
 }
 
@@ -302,4 +336,5 @@ function makeEnemy(lvl,tstage) {
     }
   }
 }
+
 
