@@ -1,13 +1,13 @@
 # Jam timetable
 
 ## Tasks {#tasks}
-- [ ] Brainstorm 
-- [ ] Landon idea
-- [ ] Prototype
+- [x] Brainstorm 
+- [x] Landon idea
+- [x] Prototype
 - [ ] Art
 - [ ] Finish v1
-- [ ] Playtest
-- [ ] Add more levels
+- [x] Playtest
+- [ ] ~~Add more levels~~
 - [ ] Polish
 - [ ] Submit
 
