@@ -44,6 +44,8 @@ class Enemy{
         if (d < (player.w1 + player.w2 )/2) {
             this.health = 0;
             score += 10;
+            hit.play();
+            hit.setVolume(0.3)
         }
         if (this.type == 0) {
             let dc = dist(this.x,this.y,core.x,core.y)
@@ -57,6 +59,8 @@ class Enemy{
             if (dc < core.w) {
                 this.health = 0;
                 core.health += 1;
+                hem.play()
+                hem.setVolume(0.4)
             }
         }
 

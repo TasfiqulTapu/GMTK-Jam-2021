@@ -1,6 +1,7 @@
-let menu,game,spn,player,core,lvl,tstage,score,hint;
-let h1,h2,h3,h4,h5,en,he,sh,ov,pxlfnt;
+let menu,game,spn,player,core,lvl,tstage,hint,cre,logo;
+let h1,h2,h3,h4,h5,en,he,sh,ov,pxlfnt,hit,hem,moosic;
 let enemy = [];
+let score = 0;
 let currentScreen;
 function preload() {
   h1 = loadImage('art/5.png');
@@ -12,13 +13,19 @@ function preload() {
   he = loadImage('art/heart.png');
   sh = loadImage('art/shield.png');
   ov = loadImage('art/overlay.png');
-  pxlfnt = loadFont('art/pixelFont.ttf')
+  logo = loadImage('art/gmtk.gif');
+  pxlfnt = loadFont('art/pixelFont.ttf');
+  soundFormats('wav','mp3');
+  hit = loadSound('art/hit');
+  hem = loadSound('art/health');
+  moosic = loadSound('art/spoopy.mp3');
 }
 
 function setup() {
     createCanvas(980, 540);
     menu = new Menu();
     spn = new Spawner();
+    cre = new Credits();
     currentScreen = 'menu';
     player = new Player(width/2,height/2);
     core = new Core();
@@ -31,24 +38,21 @@ function mousePressed() {
       if (mouseX>menu.x && mouseX<(menu.x+menu._x) && mouseY>menu.y && mouseY<(menu.y+menu._y)) {
         currentScreen = 'game';
         console.log('e');
-        // lvl = 1;
-        // spn.spawn(lvl);
         reset()
-        // if (enemy.length > 0) {
-        //   console.log(enemy)
-        // }
       }
+      if (mouseX>menu.cw1 && mouseX<(menu.cw1+menu._x) && mouseY>menu.ch1 && mouseY<(menu.ch1+menu._y)) {
+        currentScreen = 'credits';
+       }
     }else if (currentScreen == 'game') {
-      // if (stars.length > 0) {
-      //   for (let i = 0; i < stars.length; i++) {
-      //     let xdiff = stars[i].x - mouseX;
-      //     let ydiff = stars[i].y - mouseY;
-      //     if (Math.abs(xdiff)>20 && Math.abs(ydiff)>20) {
-      //       stars[i].highlighted = true;
-      //     }
-      //   }
-      //}
+    }else if (currentScreen == 'credits') {
+      currentScreen = 'menu';
+    }else if (currentScreen == 'gameover') {
+      if (mouseX>width*(3/7) && mouseX<width*(4/7) && mouseY>height*(2/5) && mouseY<height*(3/5)) {
+        currentScreen = 'game';
+        console.log('e');
+        reset()
     }
+  }
   }
 
 function draw() {
@@ -59,6 +63,10 @@ function draw() {
 
     if (currentScreen == 'menu') {
         menu.show();
+       moosic.pause();
+
+    }else if (currentScreen == 'credits') {
+      cre.show();
     }else if (currentScreen == 'game') {
       
       spn.spawn(lvl);
@@ -115,7 +123,7 @@ function draw() {
           hint = 'You probably are the first person to reach this'
         }
         if (score>1500) {
-          hint = 'This spaghetti code hurts my brain';
+          hint = 'This spaghetti code hurts my head';
         }
         if (score>1680) {
           hint = 'here\'s a secret...'
@@ -127,7 +135,7 @@ function draw() {
           hint = 'I\'m tired so byee....'
         }
         if (score>2300) {
-          hint = 'FUCKING STOP PLAYING \n It hurts me'
+          hint = 'STOP PLAYING \n It hurts me'
         }
         if (score>7000) {
           hint = 'Hacking is not cool'
@@ -192,7 +200,17 @@ function draw() {
        // console.group(frameRate())
        //console.log(frameRate())
     }else if (currentScreen == 'gameover') {
-      rect(200,200,200,200)
+      
+      push();
+        fill(241, 250, 238).strokeWeight(0).textSize(40);
+        textAlign(CENTER);
+        textFont(pxlfnt);
+        text(`${score}`, width/2, height*(1/3));
+        imageMode(CENTER);
+        image(en,width/2,height/2,64,64)
+        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        text(`Press on the ghost to restart\n Esc to go to menu`, width/2,height*(2/3) );
+        pop();
     }
 
     
@@ -210,6 +228,9 @@ function keyPressed() {
         currentScreen = 'menu';
       }
     if (currentScreen == 'gameover' && keyCode === 27) { 
+      currentScreen = 'menu';
+    }
+    if (currentScreen == 'credits' && keyCode === 27) { 
       currentScreen = 'menu';
     }
     if (currentScreen == 'game') { 
@@ -241,6 +262,7 @@ function reset() {
   score = 0;
   enemy = [];
   hint = 'Use WASD / Arrow Keys to move';
+  moosic.loop();
   enemy.push(new Enemy('a',0))
 }
 
