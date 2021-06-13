@@ -52,6 +52,8 @@ class Enemy{
             if (dc < core.w) {
                 this.health = 0;
                 core.health -= 1;
+                hurt = true;
+                hc = 0;
             }
         }
         if (this.type == 1) {

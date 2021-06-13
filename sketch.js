@@ -4,6 +4,8 @@ let enemy = [];
 let score = 0;
 let currentScreen;
 let playing = false;
+let hurt = false;
+let hc = 0;
 function preload() {
 
   logo = loadImage('art/gmtk.gif');
@@ -100,6 +102,14 @@ function draw() {
       sps.show();
     }else if (currentScreen == 'game') {
       
+      if (hurt == true && hc < 10 ) {
+        translate(random(-2,2),random(-2,2));
+        hc++
+      }else{
+        hurt = false;
+        translate(0,0);
+      }
+
       spn.spawn(lvl);
         for (let i = 0; i < enemy.length; i++) {
           enemy[i].update(player,core);
