@@ -10,9 +10,18 @@ class Player{
     show(){
         rectMode(CENTER);
         if (this.rot == 'w') {
+            push();
+            fill(230, 57, 70);
+            stroke(241, 250, 238);
             rect(this.x,this.y,this.w2,this.w1);
+            pop();
         }else{
+            push();
+            fill(230, 57, 70);
+            stroke(241, 250, 238);
             rect(this.x,this.y,this.w1,this.w2);
+            pop();
+        
         }
         
     }

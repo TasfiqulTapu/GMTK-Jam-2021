@@ -27,11 +27,11 @@ class Enemy{
         this.type = type;
     }
     show(){
-        rectMode(CENTER);
-        if (this.ydir == 0) {
-            rect(this.x,this.y,this.w2,this.w1);
-        }else{
-            rect(this.x,this.y,this.w1,this.w2);
+        imageMode(CENTER);
+        if (this.type == 0) {
+            image(en,this.x,this.y,this.w2,this.w2)
+        }else if (this.type == 1) {
+            image(he,this.x,this.y,this.w2,this.w2)
         }
     }
     update(player,core){
@@ -43,6 +43,7 @@ class Enemy{
         let d = dist(this.x,this.y,player.x,player.y)
         if (d < (player.w1 + player.w2 )/2) {
             this.health = 0;
+            score += 10;
         }
         if (this.type == 0) {
             let dc = dist(this.x,this.y,core.x,core.y)

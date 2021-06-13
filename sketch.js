@@ -1,6 +1,19 @@
-let menu,game,spn,player,core,lvl,tstage;
+let menu,game,spn,player,core,lvl,tstage,score,hint;
+let h1,h2,h3,h4,h5,en,he,sh,ov,pxlfnt;
 let enemy = [];
 let currentScreen;
+function preload() {
+  h1 = loadImage('art/5.png');
+  h2 = loadImage('art/4.png');
+  h3 = loadImage('art/3.png');
+  h4 = loadImage('art/2.png');
+  h5 = loadImage('art/1.png');
+  en = loadImage('art/enemy.png');
+  he = loadImage('art/heart.png');
+  sh = loadImage('art/shield.png');
+  ov = loadImage('art/overlay.png');
+  pxlfnt = loadFont('art/pixelFont.ttf')
+}
 
 function setup() {
     createCanvas(980, 540);
@@ -39,7 +52,7 @@ function mousePressed() {
   }
 
 function draw() {
-    background(20);
+    background(69, 123, 157);
   //  if (enemy.length > 0) {
   //    console.log(enemy)
   //  }
@@ -56,10 +69,96 @@ function draw() {
             enemy.splice(i, 1);
             if (tstage == 1) {
               tstage = 2;
-              makeEnemy(lvl, tstage)
+              makeEnemy(lvl, tstage);
             }
           }
         }
+        // :(
+        // You ruined the fun for yourself
+        if (tstage == 3) {
+          hint = 'Hearts are nice unlike ghosts';
+        }
+        if (tstage == 5 ||tstage == 6) {
+          hint = 'More health = Less visibility \n they\'re like joined together';
+        }
+        if (score>150) {
+          hint = 'GLHF'
+        }
+        if (score>200) {
+          hint = 'Its a buggy mess I suggest u stop playing'
+        }
+        if (score>300) {
+          hint = 'I never expected anyone to play this far'
+        }
+        if (score>400) {
+          hint = 'This is garbage, stop playing.'
+        }
+        if (score>500) {
+          hint = 'I really shouldn\'t have realesed this game'
+        }
+        if (score>700) {
+          hint = 'Are you playing to read these messages?'
+        }
+        if (score>800) {
+          hint = '...'
+        }
+        if (score>850) {
+          hint = 'I myself haven\'t played this far'
+        }
+        if (score>950) {
+          hint = 'Since you\'ve come this far i\'ll ask you one thing'
+        }
+        if (score>1100) {
+          hint = 'Why the fuck are you still playing'
+        }
+        if (score>1290) {
+          hint = 'You probably are the first person to reach this'
+        }
+        if (score>1500) {
+          hint = 'This spaghetti code hurts my brain';
+        }
+        if (score>1680) {
+          hint = 'here\'s a secret...'
+        }
+        if (score>1780) {
+          hint = 'I\'m enjoying writing these'
+        }
+        if (score>1900) {
+          hint = 'I\'m tired so byee....'
+        }
+        if (score>2300) {
+          hint = 'FUCKING STOP PLAYING \n It hurts me'
+        }
+        if (score>7000) {
+          hint = 'Hacking is not cool'
+        }
+        if (score>7400) {
+          hint = '... but I\'ll allow it since it\'s singleplayer'
+        }
+        // Stop looking at page source :(
+        // There are better things you could be doing
+
+        if (core.health >= 5 && tstage > 4) {
+          imageMode(CENTER)
+          image(ov,width/2,height/2,width*6.5/5,height*6.5/5)
+        }
+        if (core.health == 4 && tstage > 4) {
+          imageMode(CENTER)
+          image(ov,width/2,height/2,width*7/5,height*7/5)
+        }
+        if (core.health == 3 && tstage > 4) {
+          imageMode(CENTER)
+          image(ov,width/2,height/2,width*8/5,height*8/5)
+        }
+        if (core.health == 2 && tstage > 4) {
+          imageMode(CENTER)
+          image(ov,width/2,height/2,width*9/5,height*9/5)
+        }
+        if (core.health == 1 && tstage > 4) {
+          imageMode(CENTER)
+          image(ov,width/2,height/2,width*2,height*2)
+        }
+
         player.show();
         core.show();
         if (enemy.length == 0){
@@ -75,6 +174,23 @@ function draw() {
         if (core.health < 1) {
           currentScreen = 'gameover'
         }
+        if (core.health > 5) {
+          core.health = 5;
+        }
+        push();
+        fill(241, 250, 238).strokeWeight(0).textSize(40);
+        textAlign(LEFT);
+        textFont(pxlfnt);
+        text(`Score:${score}`, 10, 40);
+        imageMode(CENTER)
+        image(he,width-60,25,40,40)
+        text(`${core.health}`, width-30, 40);
+        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        textAlign(CENTER);
+        text(`${hint}`, width/2, height-30);
+        pop();
+       // console.group(frameRate())
+       //console.log(frameRate())
     }else if (currentScreen == 'gameover') {
       rect(200,200,200,200)
     }
@@ -93,21 +209,24 @@ function keyPressed() {
     if (currentScreen == 'game' && keyCode === 27) { 
         currentScreen = 'menu';
       }
+    if (currentScreen == 'gameover' && keyCode === 27) { 
+      currentScreen = 'menu';
+    }
     if (currentScreen == 'game') { 
        
-      if (keyCode == 87) {
+      if (keyCode == 87 || keyCode == 38) {
         player.x = width/2;
         player.y = height/2 - player.r;
         player.rot = 'w';
-      } else if (keyCode == 83){
+      } else if (keyCode == 83 || keyCode == 40){
         player.x = width/2;
         player.y = height/2 + player.r;
         player.rot = 'w';
-      }else if (keyCode == 65) {
+      }else if (keyCode == 65 || keyCode == 37) {
         player.x = width/2 - player.r;
         player.y = height/2;
         player.rot = 'l';
-      } else if (keyCode == 68){
+      } else if (keyCode == 68 || keyCode == 39){
         player.x = width/2 + player.r;
         player.y = height/2;
         player.rot = 'l';
@@ -118,6 +237,10 @@ function keyPressed() {
 function reset() {
   lvl = 0.009;
   tstage = 1;
+  core.health = 5;
+  score = 0;
+  enemy = [];
+  hint = 'Use WASD / Arrow Keys to move';
   enemy.push(new Enemy('a',0))
 }
 
