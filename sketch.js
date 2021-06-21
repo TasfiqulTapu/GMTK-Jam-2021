@@ -28,7 +28,11 @@ function preload() {
 }
 
 function setup() {
+  if (windowWidth>=980 && windowHeight>=540) {
     createCanvas(980, 540);
+  }else{
+    createCanvas(windowWidth, windowHeight);
+  }
     menu = new Menu();
     spn = new Spawner();
     cre = new Credits();
@@ -158,7 +162,7 @@ function draw() {
           hint = 'Since you\'ve come this far i\'ll ask you one thing'
         }
         if (score>1100) {
-          hint = 'Why the fuck are you still playing'
+          hint = 'Why the f are you still playing'
         }
         if (score>1290) {
           hint = 'You probably are the first person to reach this'
@@ -178,11 +182,39 @@ function draw() {
         if (score>2300) {
           hint = 'STOP PLAYING \n It hurts me'
         }
-        if (score>7000) {
+        if (score>2700) {
+          hint = 'You\'re a stubborn one aren\'t you?'
+        }if (score>3100) {
+          hint = 'Please stop'
+        }if (score>3600) {
+          hint = 'Stop'
+        }if (score>4000) {
+          hint = 'Close down thw window and put this \n time to better use'
+        }if (score>4500) {
+          hint = 'Maybe find some new hobbies'
+        }if (score>4900) {
+          hint = 'Help out on some work around the house'
+        }if (score>5400) {
+          hint = 'No point talking with you'
+        }if (score>5900) {
+          hint = 'I give up'
+        }if (score>6300) {
+          hint = 'Here take this trophy'
+        }if (score>6800) {
+          hint = 'You win I lose'
+        }if (score>7200) {
+          hint = 'This is end of this game.'
+        }if (score>8000) {
+          hint = ''
+        }
+        if (score>14000) {
           hint = 'Hacking is not cool'
         }
-        if (score>7400) {
+        if (score>14400) {
           hint = '... but I\'ll allow it since it\'s singleplayer'
+        }
+        if (score>15000) {
+          hint = ''
         }
         // Stop looking at page source :(
         // There are better things you could be doing
