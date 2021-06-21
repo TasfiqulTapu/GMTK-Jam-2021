@@ -15,22 +15,22 @@ class Menu{
 
 
         push();
-        fill(241, 250, 238).strokeWeight(0).textSize(40);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.074);//40
         textAlign(LEFT);
         textFont(pxlfnt);
         text(`Play`, this.x + 40, this.y+ 45);
-        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.037);//20
         text(`(space)`, this.x + 40, this.y+ 60);
-        fill(241, 250, 238).strokeWeight(0).textSize(30);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.055);//30
         text(`Credits`, this.cw1+ 40,this.ch1+ 40);
          imageMode(CORNER);
          image(mpng,0,0,width,height);
-         fill(241, 250, 238).strokeWeight(0).textSize(70);//70
+         fill(241, 250, 238).strokeWeight(0).textSize(height * 0.129);//70
         textAlign(LEFT);
         textFont(pxlfnt);
         text(`Cheeky Chappies`, 40, height/6);
         textAlign(LEFT);
-        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.037);
         text(`by Tapu`, width/2 + 110,height/6 + 30);
         pop();
 
@@ -59,7 +59,7 @@ class Splash{
         textFont(pxlfnt);
         text(`Cheeky Chappies`, width/2, height/2);
         textAlign(LEFT);
-        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.037);
         text(`by Tapu`, width/2 + 130,height/2 + 30);
         textAlign(CENTER);
         text(`made for`, width/2,height - 110);

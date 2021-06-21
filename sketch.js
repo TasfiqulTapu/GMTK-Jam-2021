@@ -259,14 +259,14 @@ function draw() {
           core.health = 5;
         }
         push();
-        fill(241, 250, 238).strokeWeight(0).textSize(40);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.074);
         textAlign(LEFT);
         textFont(pxlfnt);
         text(`Score:${score}`, 10, 40);
         imageMode(CENTER)
-        image(he,width-60,25,40,40)
+        image(he,width-60,25,height * 0.074,height * 0.074)
         text(`${core.health}`, width-30, 40);
-        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.037);
         textAlign(CENTER);
         text(`${hint}`, width/2, height-30);
         pop();
@@ -275,13 +275,13 @@ function draw() {
     }else if (currentScreen == 'gameover') {
       
       push();
-        fill(241, 250, 238).strokeWeight(0).textSize(40);
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.074);
         textAlign(CENTER);
         textFont(pxlfnt);
         text(`${score}`, width/2, height*(1/3));
         imageMode(CENTER);
-        image(en,width/2,height/2,64,64)
-        fill(241, 250, 238).strokeWeight(0).textSize(20);
+        image(en,width/2,height/2,height * 0.118,height * 0.118)
+        fill(241, 250, 238).strokeWeight(0).textSize(height * 0.037);
         text(`Press on the ghost to restart\n Esc to go to menu`, width/2,height*(2/3) );
         pop();
     }

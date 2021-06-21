@@ -8,8 +8,8 @@
 - [ ] Finish v1
 - [x] Playtest
 - [ ] ~~Add more levels~~
-- [ ] Polish
-- [ ] Submit
+- [x] Polish
+- [x] Submit
 
 ## Table {#table}
 | Time | Task | Time allocated |
@@ -34,3 +34,6 @@
 | 7pm-8pm | Submit | 1 hour |
 | 8pm-12am | Panik | 4 hour |
 | 48 hours | Total spent on gamedev | 23 hour 3 min |
+
+/\
+this did no go as planned.
