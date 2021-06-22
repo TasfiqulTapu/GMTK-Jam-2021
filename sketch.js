@@ -89,6 +89,7 @@ function draw() {
   //  if (enemy.length > 0) {
   //    console.log(enemy)
   //  }
+
     if ( sps.i < sps.total) {
       currentScreen = 'splash'
        sps.i++ ;
@@ -197,16 +198,19 @@ function draw() {
         }if (score>5400) {
           hint = 'No point talking with you'
         }if (score>5900) {
-          hint = 'I give up'
+          hint = 'I\'m done'
         }if (score>6300) {
+          hint = 'I give up'
+        }if (score>6600) {
           hint = 'Here take this trophy'
-        }if (score>6800) {
+        }if (score>6969) {
           hint = 'You win I lose'
-        }if (score>7200) {
-          hint = 'This is end of this game.'
-        }if (score>8000) {
-          hint = ''
-        }
+        } 
+        //if (score>7200) {
+        //   hint = 'This is end of this game.'
+        // }if (score>8000) {
+        //   hint = ''
+        // }
         if (score>14000) {
           hint = 'Hacking is not cool'
         }
@@ -263,6 +267,11 @@ function draw() {
         textAlign(LEFT);
         textFont(pxlfnt);
         text(`Score:${score}`, 10, 40);
+        if (score>6969) {
+          textFont('Georgia');
+          text('🏆', 10, 82);
+        }
+        textFont(pxlfnt);
         imageMode(CENTER)
         image(he,width-60,25,height * 0.074,height * 0.074)
         text(`${core.health}`, width-30, 40);
